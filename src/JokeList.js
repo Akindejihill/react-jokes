@@ -62,11 +62,21 @@ export default function JokeList(props) {
     }, []);
 
     function vote(id, delta) {
-        setJokes((jokes) =>
-            jokes.map((joke) =>
-                joke.id === id ? { ...joke, votes: joke.votes + delta } : joke
-            )
+        console.log("joke id delta: ", id, delta)
+        console.log(
+          jokes.map((joke) =>
+            joke.id === id ? { ...joke, votes: joke.votes + delta } : joke
+          )
         );
+        const list = jokes.map((joke) => {
+          console.log("Joke id: ", joke.joke.id, id);
+          if (joke.joke.id === id){
+            console.log("test delta: ", joke.votes + delta)
+            return {...joke, votes: joke.votes + delta}
+          } else return joke
+        });
+
+        setJokes(list);
     }
 
     if (isLoading) {
